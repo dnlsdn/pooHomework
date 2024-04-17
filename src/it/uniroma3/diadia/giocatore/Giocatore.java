@@ -24,4 +24,14 @@ public class Giocatore {
 	public void setCfu(int cfu) {
 		this.cfu = cfu;		
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder result = new StringBuilder();
+		
+		result.append("\nNumero CFU: " + this.cfu + "\n");
+		result.append("Attrezzi in borsa: " + getBorsa().toString());
+		
+		return result.toString();
+	}
 }

@@ -1,7 +1,5 @@
 package it.uniroma3.diadia;
 
-import it.uniroma3.diadia.ambienti.Stanza;
-import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.comandi.Comando;
 import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
 
@@ -36,7 +34,6 @@ public class DiaDia {
 		this.io = io;
 	}
 	
-	
 
 	public void gioca() {
 		String istruzione;
@@ -56,7 +53,7 @@ public class DiaDia {
 	private boolean processaIstruzione(String istruzione) {
 		   Comando comandoDaEseguire;
 		   FabbricaDiComandiFisarmonica factory = new FabbricaDiComandiFisarmonica();
-		   comandoDaEseguire = factory.costruisciComando(istruzione);
+		   comandoDaEseguire = factory.costruisciComando(istruzione, this.io);
 		   comandoDaEseguire.esegui(this.partita);
 		   if (this.partita.vinta())
 		           System.out.println("Hai vinto!");

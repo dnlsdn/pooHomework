@@ -2,38 +2,21 @@ package it.uniroma3.diadia.comandi;
 
 import java.util.Iterator;
 
+import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.*;;
 
 public class ComandoGuarda implements Comando{
-	private Attrezzo[] attrezziInStanza;
-	
+
+	private IOConsole io;
 
 	@Override
 	public void esegui(Partita partita) {
-		
-		System.out.println("Nome stanza: " + partita.getStanzaCorrente().getNome());
-		attrezziInStanza = partita.getStanzaCorrente().getAttrezzi();
-		
-		stampaAttrezziInStanza();
-		System.out.println("CFU disponibili: " + partita.getGiocatore().getCfu());
-	}
-	
-	public void stampaAttrezziInStanza() {
-		System.out.print("Attrezzi in stanza: ");
-		for (int i = 0; i < attrezziInStanza.length; i++) {
-			if (attrezziInStanza[i] != null) {
-				System.out.print(attrezziInStanza[i] + " ");
-			}
-		}
-		System.out.println("");
+		System.out.println(partita.getStanzaCorrente().toString()+ partita.getGiocatore().toString());
 	}
 
 	@Override
-	public void setParametro(String parametro) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void setParametro(String parametro) {}
 	
 	@Override
 	public String getNome() {
@@ -42,7 +25,12 @@ public class ComandoGuarda implements Comando{
 
 	@Override
 	public String getParametro() {
-		return "Questo comando non ha parametri";
+		return null;
+	}
+	
+	@Override
+	public void setIO(IOConsole io) {
+		this.io = io;	
 	}
 
 }
