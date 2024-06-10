@@ -1,35 +1,33 @@
 package it.uniroma3.diadia.ambienti;
 
-import it.uniroma3.diadia.IO;
+public class StanzaBloccata extends Stanza {
 
-public class StanzaBloccata extends Stanza{
-	private String nomeAttrezzoNecessario;
-	private String direzioneBloccata;
-	private IO io;
+	private Direzione direzioneBloccata;
+	private String attrezzoSbloccante;
 
-	public StanzaBloccata(String nome, String nomeAttrezzoNecessario, String direzioneBloccata) {
+	public StanzaBloccata(String nome, String direzioneBloccata, String attrezzoSbloccante) {
 		super(nome);
-		this.nomeAttrezzoNecessario = nomeAttrezzoNecessario;
-		this.direzioneBloccata = direzioneBloccata;
+		this.direzioneBloccata = Direzione.valueOf(direzioneBloccata);
+		this.attrezzoSbloccante = attrezzoSbloccante;
 	}
+
+
 
 	@Override
 	public Stanza getStanzaAdiacente(String direzione) {
-		if (super.hasAttrezzo(nomeAttrezzoNecessario)) {
-			return super.getStanzaAdiacente(direzione);
+		if(direzioneBloccata.equals(Direzione.valueOf(direzione)) && !this.hasAttrezzo(attrezzoSbloccante)) {
+			return this;
 		}
-
-		io.mostraMessaggio("La direzione " + direzione + " non è raggiungibile");
-		return this;
+		return super.getStanzaAdiacente(direzione);
 	}
 
 	@Override
 	public String getDescrizione() {
-		StringBuilder s = new StringBuilder();
-		s.append("Direzione bloccata: " + this.direzioneBloccata);
-		s.append("Attrezzo sbloccante: " + this.nomeAttrezzoNecessario);
+		String bloccata = "Stanza bloccata nella direzione: "+ direzioneBloccata+"\nPrendi il " + attrezzoSbloccante + " e posalo nella stanza";
 
-		return s.toString();
+		if(!this.hasAttrezzo(attrezzoSbloccante))
+			return bloccata;
+		return super.getDescrizione();
 	}
 }
 
